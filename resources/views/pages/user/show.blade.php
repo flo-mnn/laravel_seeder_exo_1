@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="row my-5">
-        <a href="/" class="btn btn-secondary">go back</a>
+        <a href="/users/all" class="btn btn-secondary">go back</a>
     </div>
 </div>
 @endsection

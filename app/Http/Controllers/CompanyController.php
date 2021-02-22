@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user.all', ['users'=> User::all()]);
+        return view('pages.company.all', ['companies'=> Company::all()]);
     }
 
     /**
@@ -41,42 +41,45 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('pages.user.show', ['user'=> User::find($id)]);
+        return view('pages.company.show', ['company'=> Company::find($id)]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('pages.user.edit', ['user'=> User::find($id)]);
+        return view('pages.company.edit', ['company'=> Company::find($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $update = User::find($id);
+        $update = Company::find($id);
         $update-> name = $request->name;
-        $update-> age = $request->age;
-        $update-> email = $request->email;
+        $update-> address = $request->address;
         $update-> phone = $request->phone;
+        $update-> email = $request->email;
+        $update-> contact_surname = $request->contact_surname;
+        $update-> contact_first = $request->email;
+        $update-> image = $request->image;
         $update->save();
 
-        return redirect('users/show/'.$update->id);
+        return redirect('companies/show/'.$update->id);
 
 
     }
@@ -84,17 +87,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         if ($id == 'all') {
-            User::truncate();
+            Company::truncate();
         } else {
-            $destroy = User::find($id);
+            $destroy = Company::find($id);
             $destroy->delete();
         }
-        return redirect('/users/all');  
+        return redirect('/companies/all');  
     }
 }
